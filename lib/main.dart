@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scan_zeit/screens/main_screen/main_screen.dart';
 
 import 'core/misc/constants.dart';
 import 'screens/intro_screen/intro_screen.dart';
@@ -20,8 +21,9 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         IntroScreen.id: (context) => IntroScreen(),
         LoginRegisterScreen.id: (context) => LoginRegisterScreen(),
+        MainScreen.id: (context) => MainScreen(),
       },
-      initialRoute: LoginRegisterScreen.id,
+      initialRoute: MainScreen.id,
     );
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:scan_zeit/screens/login_register_screen/login_register_screen.dart';
 
 import '../../../core/misc/constants.dart';
-import '../widgets/toggle_button.dart';
+import '../../global/widgets/toggle_button.dart';
 
 class FirstPage extends StatelessWidget {
   @override
@@ -14,32 +16,39 @@ class FirstPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Placeholder(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ToggleButton(
-                  text: 'Customer',
-                  color: kColorScheme[900],
-                  onToggle: () {},
-                ),
-                SizedBox(
-                  height: size.height * 0.05,
-                ),
-                ToggleButton(
-                  text: 'Merchant',
-                  color: kColorScheme[900],
-                  onToggle: () {},
-                  toggled: true,
-                )
-              ],
+            Expanded(child: SvgPicture.asset('assets/svg/cart.svg')),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ToggleButton(
+                    text: 'Customer',
+                    color: kColorScheme[900],
+                    onToggle: () {},
+                  ),
+                  SizedBox(
+                    height: size.height * 0.05,
+                  ),
+                  ToggleButton(
+                    text: 'Merchant',
+                    color: kColorScheme[900],
+                    onToggle: () {},
+                    toggled: true,
+                  )
+                ],
+              ),
             ),
             ToggleButton(
               text: 'Get Started',
               color: kColorScheme[900],
-              onToggle: () {},
+              onToggle: () {
+                Navigator.pushNamed(context, LoginRegisterScreen.id);
+              },
               toggled: true,
+            ),
+            SizedBox(
+              height: size.height * 0.02,
             )
           ],
         ),
