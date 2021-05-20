@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "213717130008",
+    "project_id": "scan-zeit",
+    "storage_bucket": "scan-zeit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:213717130008:android:09a596be39106221585c6d",
+        "android_client_info": {
+          "package_name": "com.rijfas.scan_zeit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "213717130008-k9qotnb7a3iifkq4c803t8nse23nkel7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoAmH4nXLbuPlc0-7rCXS29eyzHiMhHGE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "213717130008-k9qotnb7a3iifkq4c803t8nse23nkel7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

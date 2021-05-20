@@ -5,14 +5,19 @@ import '../../../core/misc/constants.dart';
 class DefaulTextInputField extends StatelessWidget {
   final String hintText;
   final bool isPassword;
+  final Function validator;
 
   const DefaulTextInputField(
-      {Key key, @required this.hintText, this.isPassword = false})
+      {Key key,
+      @required this.hintText,
+      @required this.validator,
+      this.isPassword = false})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      validator: validator,
       decoration: InputDecoration(
         suffixIcon: isPassword
             ? Padding(

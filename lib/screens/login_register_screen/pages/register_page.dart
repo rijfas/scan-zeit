@@ -9,6 +9,7 @@ import '../widgets/default_text_input_field.dart';
 import '../widgets/custom_check_button.dart';
 
 class RegisterPage extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -24,43 +25,83 @@ class RegisterPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 SvgPicture.asset('assets/svg/register.svg'),
-                Column(
-                  children: [
-                    DefaulTextInputField(hintText: 'Email'),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    DefaulTextInputField(hintText: 'Name'),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    DefaulTextInputField(
-                      hintText: 'Password',
-                      isPassword: true,
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    DefaulTextInputField(hintText: 'Pincode'),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                            flex: 2,
-                            child: DefaulTextInputField(
-                                hintText: 'Vaccination Status')),
-                        Expanded(
-                          child: CustomCheckButton(checked: true),
-                        ),
-                        Expanded(
-                          child: CustomCheckButton(),
-                        )
-                      ],
-                    )
-                  ],
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      DefaulTextInputField(
+                        hintText: 'Email',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      DefaulTextInputField(
+                        hintText: 'Name',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      DefaulTextInputField(
+                        hintText: 'Password',
+                        isPassword: true,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      DefaulTextInputField(
+                        hintText: 'Pincode',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                              flex: 2,
+                              child: DefaulTextInputField(
+                                hintText: 'Vaccination Status',
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter some text';
+                                  }
+                                  return null;
+                                },
+                              )),
+                          Expanded(
+                            child: CustomCheckButton(checked: true),
+                          ),
+                          Expanded(
+                            child: CustomCheckButton(),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -68,7 +109,14 @@ class RegisterPage extends StatelessWidget {
                     ToggleButton(
                       text: 'Register',
                       color: kColorScheme[900],
-                      onToggle: () {},
+                      onToggle: () {
+                        if (_formKey.currentState.validate()) {
+                          // If the form is valid, display a snackbar. In the real world,
+                          // you'd often call a server or save the information in a database.
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Processing Data')));
+                        }
+                      },
                       toggled: true,
                     ),
                     SizedBox(

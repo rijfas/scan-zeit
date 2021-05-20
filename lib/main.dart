@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         LoginRegisterScreen.id: (context) => LoginRegisterScreen(),
         MainScreen.id: (context) => MainScreen(),
       },
-      initialRoute: MainScreen.id,
+      initialRoute: LoginRegisterScreen.id,
     );
   }
 }
