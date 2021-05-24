@@ -1,29 +1,46 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:scan_zeit/screens/main_screen/main_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:scan_zeit/logic/cubit/visit_recorder_cubit.dart';
 
-import 'core/misc/constants.dart';
-import 'screens/intro_screen/intro_screen.dart';
-import 'screens/login_register_screen/login_register_screen.dart';
+import 'core/constants/strings.dart';
+import 'core/themes/app_theme.dart';
+import 'logic/cubit/authentication_cubit.dart';
+import 'presentation/routers/app_router.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: MaterialColor(kColors_primaryColor, kColorScheme),
+    AppTheme.setNavigationAndStatusBar();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthenticationCubit>(
+            create: (context) => AuthenticationCubit()),
+        BlocProvider<VisitRecorderCubit>(
+            create: (context) => VisitRecorderCubit()),
+      ],
+      child: NeumorphicApp(
+        title: Strings.appName,
+        // theme: AppTheme.lightTheme,
+        themeMode: ThemeMode.light,
+        theme: NeumorphicThemeData(
+          baseColor: Color(0xffDDDDDD),
+          accentColor: AppTheme.primaryColor,
+          variantColor: AppTheme.colorPallet[900],
+          lightSource: LightSource.topLeft,
+          depth: 6,
+          intensity: 1.4,
+        ),
+        onGenerateRoute: AppRouter.onGenerateRoute,
+        initialRoute: AppRouter.intro,
       ),
-      routes: <String, WidgetBuilder>{
-        IntroScreen.id: (context) => IntroScreen(),
-        LoginRegisterScreen.id: (context) => LoginRegisterScreen(),
-        MainScreen.id: (context) => MainScreen(),
-      },
-      initialRoute: LoginRegisterScreen.id,
     );
   }
 }
