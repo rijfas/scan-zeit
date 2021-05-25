@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:scan_zeit/data/models/default_user.dart';
-import 'package:scan_zeit/data/repositories/visit_record_repository.dart';
+
+import '../../data/models/default_user.dart';
 import '../../data/models/visit_record.dart';
+import '../../data/repositories/visit_record_repository.dart';
+
 part 'visit_recorder_state.dart';
 
 class VisitRecorderCubit extends Cubit<VisitRecorderState> {

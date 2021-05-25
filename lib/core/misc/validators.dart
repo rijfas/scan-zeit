@@ -19,8 +19,8 @@ class Validators {
   }
 
   static String validatePhoneNumber(String value) {
-    if (RegExp(r'/^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/').hasMatch(value))
-      return null;
-    return 'invalid mobile number!';
+    if (value == null || value.isEmpty || value.length < 10)
+      return 'invalid mobile number!';
+    return null;
   }
 }

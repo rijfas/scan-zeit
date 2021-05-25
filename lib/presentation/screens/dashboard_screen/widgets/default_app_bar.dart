@@ -1,11 +1,12 @@
-import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+
+import '../../../../core/themes/app_theme.dart';
 import '../../../../logic/cubit/authentication_cubit.dart';
 import '../../../routers/app_router.dart';
 
 NeumorphicAppBar buildDefaultAppBar(BuildContext context) {
-  final Size size = MediaQuery.of(context).size;
   return NeumorphicAppBar(
     automaticallyImplyLeading: false,
     actions: [
@@ -18,8 +19,9 @@ NeumorphicAppBar buildDefaultAppBar(BuildContext context) {
                     title: 'Log Out?',
                     buttons: [
                       DialogButton(
-                          child:
-                              Text('Ok', style: TextStyle(color: Colors.white)),
+                          child: Text('Ok',
+                              style: AppTheme.textTheme
+                                  .copyWith(color: Colors.white)),
                           onPressed: () {
                             BlocProvider.of<AuthenticationCubit>(context)
                                 .signOut()
@@ -30,7 +32,8 @@ NeumorphicAppBar buildDefaultAppBar(BuildContext context) {
                       DialogButton(
                           child: Text(
                             'Cancel',
-                            style: TextStyle(color: Colors.white),
+                            style: AppTheme.textTheme
+                                .copyWith(color: Colors.white),
                           ),
                           onPressed: () {
                             Navigator.of(context).pop();

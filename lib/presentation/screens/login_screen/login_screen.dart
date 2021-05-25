@@ -4,15 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:scan_zeit/core/misc/validators.dart';
-import 'package:scan_zeit/logic/cubit/visit_recorder_cubit.dart';
-import 'package:scan_zeit/presentation/widgets/default_loading.dart';
 
 import '../../../core/constants/enums.dart';
 import '../../../core/misc/validators.dart';
 import '../../../logic/cubit/authentication_cubit.dart';
+import '../../../logic/cubit/visit_recorder_cubit.dart';
 import '../../routers/app_router.dart';
 import '../../widgets/default_button.dart';
+import '../../widgets/default_loading.dart';
 import '../../widgets/default_text_input_field.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -39,7 +38,10 @@ class _LoginScreenState extends State<LoginScreen> {
               closeIcon: SizedBox(),
               context: context,
               title: 'Error!',
-              content: Text('${state.message}'),
+              content: Text(
+                '${state.message}',
+                textAlign: TextAlign.center,
+              ),
               buttons: <DialogButton>[
                 DialogButton(
                     child: Text(
@@ -52,11 +54,11 @@ class _LoginScreenState extends State<LoginScreen> {
         } else if (state is Authenticated) {
           BlocProvider.of<VisitRecorderCubit>(context)
               .loadData(uid: state.user.user.uid);
-          Navigator.pushReplacementNamed(
-              context,
+          Navigator.of(context).pushNamedAndRemoveUntil(
               state.user.accountType == AccountType.customer
                   ? AppRouter.customer_dashboard
-                  : AppRouter.merchant_dashboard);
+                  : AppRouter.merchant_dashboard,
+              (_) => false);
         }
       },
       child: Scaffold(
@@ -116,7 +118,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Text(
                           'Don\'t have an account? ',
-                          style: TextStyle(color: Colors.grey[500]),
+                          style: TextStyle(
+                            color: Colors.grey[500],
+                            fontFamily: 'Poppins',
+                          ),
                         ),
                         GestureDetector(
                           onTap: () =>
@@ -126,6 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context).primaryColor,
+                              fontFamily: 'Poppins',
                             ),
                           ),
                         ),

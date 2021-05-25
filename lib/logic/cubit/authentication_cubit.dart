@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../core/constants/enums.dart';
+import '../../core/misc/firebase_exceptions.dart';
 import '../../data/models/default_user.dart';
 import '../../data/repositories/user_repository.dart';
 
@@ -51,7 +52,7 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
         emit(Authenticated(user: user));
       }
     } catch (e) {
-      emit(AuthenticationError(e.message));
+      emit(AuthenticationError(e.code));
     }
   }
 

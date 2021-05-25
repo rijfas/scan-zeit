@@ -37,4 +37,13 @@ class AppTheme {
       statusBarIconBrightness: Brightness.dark,
     ));
   }
+
+  static final textTheme = TextStyle(
+    fontFamily: 'Poppins',
+  );
+
+  static final blodTextTheme = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Poppins',
+  );
 }

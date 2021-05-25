@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
-import 'package:scan_zeit/data/models/default_user.dart';
+
+import '../models/default_user.dart';
 
 class FirebaseVisitRecordApi {
   final _firestore = FirebaseFirestore.instance;

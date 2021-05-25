@@ -14,7 +14,13 @@ class QrScanScreen extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: NeumorphicAppBar(
-        title: Text('Scan Merchant QR'),
+        title: Text(
+          'Scan QR',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Poppins',
+          ),
+        ),
       ),
       body: BlocBuilder<AuthenticationCubit, AuthenticationState>(
           builder: (context, authenticationState) {
@@ -59,8 +65,11 @@ class QrScanScreen extends StatelessWidget {
                             )),
                       ),
                       Text(
-                        'Scan Merchant QR-CODE',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        'Scan Merchant QR-CODE to record your visit',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins',
+                        ),
                       ),
                     ],
                   ),

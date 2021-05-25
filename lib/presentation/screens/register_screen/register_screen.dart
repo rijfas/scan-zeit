@@ -2,17 +2,17 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:scan_zeit/core/constants/enums.dart';
-import 'package:scan_zeit/core/misc/validators.dart';
-import 'package:scan_zeit/presentation/routers/app_router.dart';
-import 'package:scan_zeit/logic/cubit/visit_recorder_cubit.dart';
-import 'package:scan_zeit/presentation/widgets/default_loading.dart';
 
+import '../../../core/constants/enums.dart';
+import '../../../core/misc/validators.dart';
 import '../../../logic/cubit/authentication_cubit.dart';
+import '../../../logic/cubit/visit_recorder_cubit.dart';
+import '../../routers/app_router.dart';
 import '../../widgets/default_button.dart';
+import '../../widgets/default_loading.dart';
 import '../../widgets/default_text_input_field.dart';
+import 'widgets/custom_toggle.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const route = 'register';
@@ -28,7 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String phoneNumber;
   String pincode;
   AccountType accountType = AccountType.customer;
-  // bool vaccinated;
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -55,11 +55,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
         } else if (state is Authenticated) {
           BlocProvider.of<VisitRecorderCubit>(context)
               .loadData(uid: state.user.user.uid);
-          Navigator.pushReplacementNamed(
-              context,
+          Navigator.of(context).pushNamedAndRemoveUntil(
               state.user.accountType == AccountType.customer
                   ? AppRouter.customer_dashboard
-                  : AppRouter.merchant_dashboard);
+                  : AppRouter.merchant_dashboard,
+              (_) => false);
         }
       },
       child: Scaffold(
@@ -77,9 +77,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     'Register User',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: size.height * 0.05,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontSize: size.height * 0.05,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Poppins'),
                   ),
                   Form(
                     key: _formKey,
@@ -128,6 +128,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           style: TextStyle(
                             fontWeight: FontWeight.w700,
                             color: NeumorphicTheme.defaultTextColor(context),
+                            fontFamily: 'Poppins',
                           ),
                         ),
                         SizedBox(
@@ -174,7 +175,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         children: [
                           Text(
                             'Already have an account? ',
-                            style: TextStyle(color: Colors.grey[500]),
+                            style: TextStyle(
+                              color: Colors.grey[500],
+                              fontFamily: 'Poppins',
+                            ),
                           ),
                           GestureDetector(
                             onTap: () => Navigator.pushReplacementNamed(
@@ -184,6 +188,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Theme.of(context).primaryColor,
+                                fontFamily: 'Poppins',
                               ),
                             ),
                           )
@@ -197,65 +202,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class CustomToggle extends StatefulWidget {
-  final Function onChanged;
-  CustomToggle({@required this.onChanged});
-  @override
-  _CustomToggleState createState() => _CustomToggleState();
-}
-
-class _CustomToggleState extends State<CustomToggle> {
-  int _selectedIndex = 0;
-  @override
-  Widget build(BuildContext context) {
-    return NeumorphicToggle(
-      style: NeumorphicToggleStyle(
-          //backgroundColor: Colors.red,
-          ),
-      selectedIndex: _selectedIndex,
-      displayForegroundOnlyIfSelected: true,
-      children: [
-        ToggleElement(
-          background: Center(
-              child: Text(
-            "Customer",
-            style: TextStyle(fontWeight: FontWeight.w500),
-          )),
-          foreground: Center(
-              child: Text(
-            "Customer",
-            style: TextStyle(fontWeight: FontWeight.w700),
-          )),
-        ),
-        ToggleElement(
-          background: Center(
-              child: Text(
-            "Merchant",
-            style: TextStyle(fontWeight: FontWeight.w500),
-          )),
-          foreground: Center(
-              child: Text(
-            "Merchant",
-            style: TextStyle(fontWeight: FontWeight.w700),
-          )),
-        )
-      ],
-      thumb: Neumorphic(
-        style: NeumorphicStyle(
-          boxShape: NeumorphicBoxShape.roundRect(
-              BorderRadius.all(Radius.circular(12))),
-        ),
-      ),
-      onChanged: (value) {
-        setState(() {
-          _selectedIndex = value;
-          widget.onChanged(value);
-        });
-      },
     );
   }
 }

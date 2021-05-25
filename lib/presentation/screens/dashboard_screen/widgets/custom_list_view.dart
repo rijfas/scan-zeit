@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:scan_zeit/core/constants/enums.dart';
-import 'package:scan_zeit/core/misc/formatters.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../../widgets/default_expansion_tile.dart';
-import '../../../../logic/cubit/visit_recorder_cubit.dart';
+
+import '../../../../core/constants/enums.dart';
+import '../../../../core/misc/formatters.dart';
+import '../../../../core/themes/app_theme.dart';
 import '../../../../data/models/visit_record.dart';
+import '../../../../logic/cubit/visit_recorder_cubit.dart';
+import '../../../widgets/default_expansion_tile.dart';
 
 class CustomListView extends StatelessWidget {
   final List<VisitRecord> visitRecords;
@@ -74,10 +75,12 @@ class CustomListView extends StatelessWidget {
               NeumorphicIcon(Icons.tour,
                   style: NeumorphicStyle(depth: 2.0), size: size.height * 0.2),
               SizedBox(height: 10.0),
-              NeumorphicText(
+              Text(
                 'No visits so far..',
-                textStyle: NeumorphicTextStyle(fontSize: size.height * 0.03),
-                style: NeumorphicStyle(depth: 1.3),
+                style: AppTheme.blodTextTheme.copyWith(
+                  fontSize: size.height * 0.03,
+                  color: Colors.grey[500],
+                ),
               ),
             ],
           );

@@ -7,14 +7,14 @@ class DefaulTextInputField extends StatelessWidget {
   final Function validator;
   final Function onSaved;
   final TextInputType textInputType;
-  const DefaulTextInputField(
-      {Key key,
-      @required this.hintText,
-      @required this.validator,
-      @required this.onSaved,
-      @required this.textInputType,
-      this.isPassword = false})
-      : super(key: key);
+  const DefaulTextInputField({
+    Key key,
+    @required this.hintText,
+    @required this.validator,
+    @required this.onSaved,
+    @required this.textInputType,
+    this.isPassword = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +26,9 @@ class DefaulTextInputField extends StatelessWidget {
           child: Text(
             hintText,
             style: TextStyle(
-              fontWeight: FontWeight.w700,
-              color: NeumorphicTheme.defaultTextColor(context),
-            ),
+                fontWeight: FontWeight.w700,
+                color: NeumorphicTheme.defaultTextColor(context),
+                fontFamily: 'Poppins'),
           ),
         ),
         Neumorphic(
@@ -42,7 +42,9 @@ class DefaulTextInputField extends StatelessWidget {
             keyboardType: textInputType,
             validator: validator,
             onSaved: onSaved,
-            decoration: InputDecoration.collapsed(hintText: hintText),
+            decoration: InputDecoration.collapsed(
+                hintText: hintText,
+                hintStyle: TextStyle(fontFamily: 'Poppins')),
           ),
         )
       ],

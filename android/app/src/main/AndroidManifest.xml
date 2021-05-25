@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rijfas.scan_zeit">
    <application
-        android:label="scan_zeit"
+        android:label="Scan-Zeit"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

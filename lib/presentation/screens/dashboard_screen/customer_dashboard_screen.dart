@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:scan_zeit/core/misc/formatters.dart';
-import 'package:scan_zeit/core/themes/app_theme.dart';
 
-import '../../widgets/default_error_display.dart';
 import '../../../core/constants/enums.dart';
+import '../../../core/misc/formatters.dart';
 import '../../../logic/cubit/authentication_cubit.dart';
 import '../../../logic/cubit/visit_recorder_cubit.dart';
 import '../../routers/app_router.dart';
+import '../../widgets/default_error_display.dart';
 import 'widgets/custom_list_view.dart';
 import 'widgets/default_app_bar.dart';
 import 'widgets/summary_display.dart';

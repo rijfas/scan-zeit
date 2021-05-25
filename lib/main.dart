@@ -2,11 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:scan_zeit/logic/cubit/visit_recorder_cubit.dart';
 
 import 'core/constants/strings.dart';
 import 'core/themes/app_theme.dart';
 import 'logic/cubit/authentication_cubit.dart';
+import 'logic/cubit/visit_recorder_cubit.dart';
 import 'presentation/routers/app_router.dart';
 
 void main() async {
@@ -28,7 +28,6 @@ class MyApp extends StatelessWidget {
       ],
       child: NeumorphicApp(
         title: Strings.appName,
-        // theme: AppTheme.lightTheme,
         themeMode: ThemeMode.light,
         theme: NeumorphicThemeData(
           baseColor: Color(0xffDDDDDD),

@@ -29,6 +29,9 @@ String getMessageFromErrorCode(String errorCode) {
     case "invalid-email":
       return "Email address is invalid.";
       break;
+    case "network-request-failed":
+      return "Network error";
+      break;
     default:
       return "Login failed. Please try again.";
       break;

@@ -1,8 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:scan_zeit/data/data_providers/firebase_visit_record_api.dart';
-import 'package:scan_zeit/data/models/default_user.dart';
-import 'package:scan_zeit/data/models/visit_record.dart';
+import 'package:flutter/material.dart';
+
+import '../data_providers/firebase_visit_record_api.dart';
+import '../models/default_user.dart';
+import '../models/visit_record.dart';
 
 class VisitRecordRepository {
   final FirebaseVisitRecordApi _fireBaseVisitRecordApi =

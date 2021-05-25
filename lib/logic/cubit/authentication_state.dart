@@ -15,6 +15,7 @@ class Authenticated extends AuthenticationState {
 }
 
 class AuthenticationError extends AuthenticationState {
-  final message;
-  AuthenticationError(this.message);
+  final String message;
+  AuthenticationError(String message)
+      : this.message = getMessageFromErrorCode(message);
 }

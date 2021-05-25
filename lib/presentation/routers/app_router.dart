@@ -35,14 +35,6 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => QrDisplayScreen());
       case QrScanScreen.route:
         return MaterialPageRoute(builder: (_) => QrScanScreen());
-      // case 'register_customer':
-      //   return MaterialPageRoute(builder: (_) => RegisterCustomerScreen());
-      // case 'register_merchant':
-      //   return MaterialPageRoute(builder: (_) => RegisterMerchantScreen());
-      // case 'login':
-      //   return MaterialPageRoute(builder: (_) => LoginScreen());
-      // case 'customer_main_screen':
-      //   return MaterialPageRoute(builder: (_) => CustomerMainScreen());
       default:
         throw const RouteException('Invalid Route!');
     }
