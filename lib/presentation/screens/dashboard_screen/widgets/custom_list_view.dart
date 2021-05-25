@@ -14,10 +14,11 @@ class CustomListView extends StatelessWidget {
   final List<VisitRecord> visitRecords;
   final String uid;
   final AccountType accountType;
-  CustomListView(
-      {@required this.visitRecords,
-      @required this.uid,
-      @required this.accountType});
+  CustomListView({
+    @required this.visitRecords,
+    @required this.uid,
+    @required this.accountType,
+  });
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -76,7 +77,9 @@ class CustomListView extends StatelessWidget {
                   style: NeumorphicStyle(depth: 2.0), size: size.height * 0.2),
               SizedBox(height: 10.0),
               Text(
-                'No visits so far..',
+                (accountType == AccountType.customer)
+                    ? 'No visits so far..'
+                    : 'No customers so far',
                 style: AppTheme.blodTextTheme.copyWith(
                   fontSize: size.height * 0.03,
                   color: Colors.grey[500],

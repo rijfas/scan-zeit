@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 class AppTheme {
+  static const baseColor = const Color(0xffDDDDDD);
   static const primaryColor = const Color(0xFF009688);
   static const darkPrimaryColor = const Color(0xFF00796B);
   static const lightPrimaryColor = const Color(0xFFB2DFDB);
@@ -33,7 +34,7 @@ class AppTheme {
 
   static setNavigationAndStatusBar() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Color(0xffDDDDDD),
+      statusBarColor: baseColor,
       statusBarIconBrightness: Brightness.dark,
     ));
   }

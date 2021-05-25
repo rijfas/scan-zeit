@@ -44,7 +44,7 @@ class CustomerDashBoardScreen extends StatelessWidget {
                       child: CustomListView(
                         visitRecords: state.visitRecords,
                         uid: authState.user.user.uid,
-                        accountType: AccountType.merchant,
+                        accountType: AccountType.customer,
                       ),
                     ),
                   ],

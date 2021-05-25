@@ -58,6 +58,8 @@ class MerchantDashBoardScreen extends StatelessWidget {
                 return DefaultErrorDisplay();
               },
             );
+          } else if (authState is AuthenticationDone) {
+            return DefaultErrorDisplay();
           } else {
             return DefaultErrorDisplay();
           }

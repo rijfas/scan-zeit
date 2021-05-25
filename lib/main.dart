@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         title: Strings.appName,
         themeMode: ThemeMode.light,
         theme: NeumorphicThemeData(
-          baseColor: Color(0xffDDDDDD),
+          baseColor: AppTheme.baseColor,
           accentColor: AppTheme.primaryColor,
           variantColor: AppTheme.colorPallet[900],
           lightSource: LightSource.topLeft,
