@@ -42,6 +42,7 @@ class DefaulTextInputField extends StatelessWidget {
             keyboardType: textInputType,
             validator: validator,
             onSaved: onSaved,
+            obscureText: isPassword,
             decoration: InputDecoration.collapsed(
                 hintText: hintText,
                 hintStyle: TextStyle(fontFamily: 'Poppins')),
