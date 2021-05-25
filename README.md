@@ -12,7 +12,8 @@ Scan Zeit is a mobile application where shopkeepers have an app that shows QR co
 BFH/recCGIcGRrv3SHBS7/2021
 
 ## Link to product walkthrough
-[link to video](https://youtu.be/C1TgnNWNFN4)
+[![Introduction and explanation](https://img.youtube.com/vi/C1TgnNWNFN4/0.jpg)](https://youtu.be/C1TgnNWNFN4)
+
 
 ## How it Works ?
 [![Introduction and explanation](https://img.youtube.com/vi/C1TgnNWNFN4/0.jpg)](https://youtu.be/C1TgnNWNFN4)
