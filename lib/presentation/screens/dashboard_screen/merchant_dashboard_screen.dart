@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 import '../../../core/constants/enums.dart';
+import '../../../core/misc/formatters.dart';
 import '../../../logic/cubit/authentication_cubit.dart';
 import '../../../logic/cubit/visit_recorder_cubit.dart';
 import '../../routers/app_router.dart';
+import '../../widgets/default_error_display.dart';
 import 'widgets/custom_list_view.dart';
 import 'widgets/default_app_bar.dart';
 import 'widgets/summary_display.dart';
@@ -15,7 +17,7 @@ class MerchantDashBoardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       appBar: buildDefaultAppBar(context),
       body: NeumorphicBackground(
         child: BlocBuilder<AuthenticationCubit, AuthenticationState>(
@@ -33,8 +35,10 @@ class MerchantDashBoardScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: SummaryDisplay(
-                            title: '${state.visitRecords.length} Customers',
-                            subtitle: '${DateTime.now()}'),
+                            title:
+                                '${state.visitRecords.length} Customer${Formatters.pluralFormat(state.visitRecords.length)}',
+                            subtitle:
+                                '${Formatters.formatDateHalf(DateTime.now())}'),
                       ),
                       Expanded(
                         child: CustomListView(
@@ -46,23 +50,21 @@ class MerchantDashBoardScreen extends StatelessWidget {
                     ],
                   );
                 } else if (state is VisitRecorderError) {
-                  return Center(
-                    child: Text('Error While Loading Data..'),
-                  );
+                  return DefaultErrorDisplay();
                 } else if (state is VisitRecorderRemoved) {
                   BlocProvider.of<VisitRecorderCubit>(context)
                       .loadData(uid: authState.user.user.uid);
                 }
-                return Text('Unknow Error..');
+                return DefaultErrorDisplay();
               },
             );
           } else {
-            return Text('Unknow Error..');
+            return DefaultErrorDisplay();
           }
         }),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.qr_code),
+      floatingActionButton: NeumorphicFloatingActionButton(
+        child: Hero(tag: 'qr', child: Icon(Icons.qr_code)),
         onPressed: () => Navigator.pushNamed(context, AppRouter.qr_display),
       ),
     );

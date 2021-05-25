@@ -11,10 +11,6 @@ class AppTheme {
   static const secondaryTextColor = const Color(0xFF757575);
   static const dividerColor = const Color(0xFFBDBDBD);
 
-  // static Color lightPrimaryColor = const Color(0xFF008A7B);
-  // static Color lightBackgroundColor = const Color(0xFFFFFFFF);
-  // // static Color lightAccentColor = const Color(0xFFEEF8F7);
-  // static Color lightAccentColor = const Color(0xFF009E8D);
   static const Map<int, Color> colorPallet = {
     50: const Color.fromRGBO(0, 138, 123, .1),
     100: const Color.fromRGBO(0, 138, 123, .2),

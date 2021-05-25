@@ -4,9 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:scan_zeit/core/misc/validators.dart';
 import 'package:scan_zeit/logic/cubit/visit_recorder_cubit.dart';
+import 'package:scan_zeit/presentation/widgets/default_loading.dart';
 
 import '../../../core/constants/enums.dart';
+import '../../../core/misc/validators.dart';
 import '../../../logic/cubit/authentication_cubit.dart';
 import '../../routers/app_router.dart';
 import '../../widgets/default_button.dart';
@@ -29,19 +32,14 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocListener<AuthenticationCubit, AuthenticationState>(
       listener: (context, state) {
         if (state is AuthenticationLoading) {
-          Alert(
-            context: context,
-            title: 'Signing In...',
-            content: Container(
-              child: CircularProgressIndicator(),
-            ),
-          ).show();
+          showDefaultLoadingDialog(context: context, title: 'Signing In...');
         } else if (state is AuthenticationError) {
           if (Navigator.canPop(context)) Navigator.pop(context);
           Alert(
+              closeIcon: SizedBox(),
               context: context,
-              title: 'message:${state.message}',
-              type: AlertType.error,
+              title: 'Error!',
+              content: Text('${state.message}'),
               buttons: <DialogButton>[
                 DialogButton(
                     child: Text(
@@ -79,26 +77,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     children: [
                       DefaulTextInputField(
+                        textInputType: TextInputType.emailAddress,
                         hintText: 'Email',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
+                        validator: Validators.validateEmail,
                         onSaved: (String value) => email = value,
                       ),
                       SizedBox(
                         height: size.height * 0.04,
                       ),
                       DefaulTextInputField(
+                        textInputType: TextInputType.visiblePassword,
                         hintText: 'Password',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
+                        validator: Validators.validatePassword,
                         onSaved: (String value) => password = value,
                         isPassword: true,
                       )

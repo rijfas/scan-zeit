@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:scan_zeit/core/misc/formatters.dart';
+import 'package:scan_zeit/core/themes/app_theme.dart';
 
+import '../../widgets/default_error_display.dart';
 import '../../../core/constants/enums.dart';
 import '../../../logic/cubit/authentication_cubit.dart';
 import '../../../logic/cubit/visit_recorder_cubit.dart';
@@ -15,8 +18,8 @@ class CustomerDashBoardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: buildDefaultAppBar(context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: BlocBuilder<AuthenticationCubit, AuthenticationState>(
           builder: (context, authState) {
         if (authState is Authenticated) {
@@ -32,8 +35,10 @@ class CustomerDashBoardScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: SummaryDisplay(
-                        title: '${state.visitRecords.length} Visits',
-                        subtitle: '${DateTime.now()}',
+                        title:
+                            '${state.visitRecords.length} Visit${Formatters.pluralFormat(state.visitRecords.length)}',
+                        subtitle:
+                            '${Formatters.formatDateHalf(DateTime.now())}',
                       ),
                     ),
                     Expanded(
@@ -46,23 +51,27 @@ class CustomerDashBoardScreen extends StatelessWidget {
                   ],
                 );
               } else if (state is VisitRecorderError) {
-                return Center(
-                  child: Text('Error While Loading Data..'),
-                );
+                return DefaultErrorDisplay();
               } else if (state is VisitRecorderRemoved) {
                 BlocProvider.of<VisitRecorderCubit>(context)
                     .loadData(uid: authState.user.user.uid);
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
               }
-              return Text('Unknow Error...');
+              return DefaultErrorDisplay();
             },
           );
         } else if (authState is AuthenticationDone) {
-          return Text('Signed Out..');
+          return DefaultErrorDisplay();
         }
-        return Text('Unknown Error..');
+        return DefaultErrorDisplay();
       }),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.camera_alt_sharp),
+      floatingActionButton: NeumorphicFloatingActionButton(
+        child: Icon(
+          Icons.qr_code_scanner_rounded,
+          color: Colors.grey[600],
+        ),
         onPressed: () => Navigator.pushNamed(context, AppRouter.qr_scan),
       ),
     );

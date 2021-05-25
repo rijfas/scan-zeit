@@ -29,7 +29,7 @@ class VisitRecorderCubit extends Cubit<VisitRecorderState> {
     });
   }
 
-  void removeData({@required String uid, @required Map<String, dynamic> data}) {
+  void removeData({@required String uid, @required Map<String, String> data}) {
     emit(VisitRecorderLoading());
     _visitRecordRepository
         .removeData(uid: uid, data: data)

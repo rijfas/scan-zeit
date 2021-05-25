@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:scan_zeit/presentation/routers/app_router.dart';
 
@@ -19,9 +20,26 @@ class IntroScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SvgPicture.asset('assets/svg/cart.svg'),
+                Column(
+                  children: [
+                    NeumorphicText(
+                      'Scan-Zeit',
+                      textStyle:
+                          NeumorphicTextStyle(fontSize: size.height * 0.08),
+                      style: NeumorphicStyle(depth: size.height * 0.003),
+                    ),
+                    Text(
+                      'TRACK YOUR VISITS',
+                      style: TextStyle(
+                          color: Colors.grey[800], fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                Neumorphic(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SvgPicture.asset('assets/svg/cart.svg')),
                 DefaultButton(
-                  text: 'GetStarted',
+                  text: 'Get Started',
                   onTap: () => Navigator.pushNamed(context, AppRouter.register),
                 )
               ],

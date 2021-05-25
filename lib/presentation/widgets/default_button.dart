@@ -14,13 +14,12 @@ class DefaultButton extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return NeumorphicButton(
       margin: const EdgeInsets.all(10.0),
-      style: NeumorphicStyle(),
+      style: NeumorphicStyle(depth: 5.0),
       onPressed: onTap,
       child: Center(
         child: Text(
           text,
           style: TextStyle(
-            color: Theme.of(context).primaryColor,
             fontWeight: FontWeight.bold,
             fontSize: size.height * 0.04,
           ),

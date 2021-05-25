@@ -12,7 +12,10 @@ class QrDisplayScreen extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: NeumorphicAppBar(
-        title: Text('Merchant-Info'),
+        title: Text(
+          'Merchant Info',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
       body: BlocBuilder<AuthenticationCubit, AuthenticationState>(
           builder: (context, state) {
@@ -25,11 +28,14 @@ class QrDisplayScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    PrettyQr(
-                      size: size.height * 0.3,
-                      typeNumber: 5,
-                      roundEdges: true,
-                      data: '${state.user.user.uid}',
+                    Hero(
+                      tag: 'qr',
+                      child: PrettyQr(
+                        size: size.height * 0.3,
+                        typeNumber: 5,
+                        roundEdges: true,
+                        data: '${state.user.user.uid}',
+                      ),
                     ),
                     Container(
                       child: Column(

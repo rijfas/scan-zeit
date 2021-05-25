@@ -5,6 +5,7 @@ import '../../../../logic/cubit/authentication_cubit.dart';
 import '../../../routers/app_router.dart';
 
 NeumorphicAppBar buildDefaultAppBar(BuildContext context) {
+  final Size size = MediaQuery.of(context).size;
   return NeumorphicAppBar(
     automaticallyImplyLeading: false,
     actions: [
@@ -15,7 +16,6 @@ NeumorphicAppBar buildDefaultAppBar(BuildContext context) {
                     closeIcon: SizedBox(),
                     context: context,
                     title: 'Log Out?',
-                    type: AlertType.warning,
                     buttons: [
                       DialogButton(
                           child:

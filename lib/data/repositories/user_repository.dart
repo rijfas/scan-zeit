@@ -22,6 +22,7 @@ class UserRepository {
       'phone_number': phoneNumber,
       'pincode': pincode,
       'is_merchant': accountType == AccountType.merchant,
+      'visits': [],
     });
     return DefaultUser(
       user: rawUser.user,

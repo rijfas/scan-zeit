@@ -26,7 +26,7 @@ class FirebaseVisitRecordApi {
     await _firestore.collection('/users').doc(user.user.uid).update({
       'visits': FieldValue.arrayUnion([
         {
-          'merchant': merchant.name,
+          'id': merchant.name,
           'mobile_number': merchant.phoneNumber,
           'time': time,
         }
@@ -35,7 +35,7 @@ class FirebaseVisitRecordApi {
     await _firestore.collection('/users').doc(scanid).update({
       'visits': FieldValue.arrayUnion([
         {
-          'customer': user.name,
+          'id': user.name,
           'mobile_number': user.phoneNumber,
           'time': time,
         }
@@ -45,10 +45,9 @@ class FirebaseVisitRecordApi {
   }
 
   Future<void> removeVisitData(
-      {@required String uid, @required Map<String, dynamic> data}) async {
-    print('Removing $data');
-    await _firestore.collection('/users').doc(uid).update({
-      'visits': FieldValue.arrayRemove([data])
+      {@required String uid, @required Map<String, String> data}) async {
+    return await _firestore.collection('/users').doc(uid).update({
+      'visits': FieldValue.arrayRemove([data]),
     });
   }
 }

@@ -13,8 +13,7 @@ class VisitRecordRepository {
         await _fireBaseVisitRecordApi.loadVisitData(uid: uid);
     for (final visit in documentSnapshot.data()['visits']) {
       visitRecords.add(VisitRecord.fromMap(map: {
-        'customer': visit['customer'],
-        'merchant': visit['merchant'],
+        'id': visit['id'],
         'mobile_number': visit['mobile_number'],
         'time': visit['time'],
       }));
@@ -31,7 +30,7 @@ class VisitRecordRepository {
   }
 
   Future<void> removeData(
-      {@required String uid, @required Map<String, dynamic> data}) async {
-    await _fireBaseVisitRecordApi.removeVisitData(uid: uid, data: data);
+      {@required String uid, @required Map<String, String> data}) async {
+    return await _fireBaseVisitRecordApi.removeVisitData(uid: uid, data: data);
   }
 }

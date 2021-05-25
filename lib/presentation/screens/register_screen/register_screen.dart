@@ -5,8 +5,10 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:scan_zeit/core/constants/enums.dart';
+import 'package:scan_zeit/core/misc/validators.dart';
 import 'package:scan_zeit/presentation/routers/app_router.dart';
 import 'package:scan_zeit/logic/cubit/visit_recorder_cubit.dart';
+import 'package:scan_zeit/presentation/widgets/default_loading.dart';
 
 import '../../../logic/cubit/authentication_cubit.dart';
 import '../../widgets/default_button.dart';
@@ -33,13 +35,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return BlocListener<AuthenticationCubit, AuthenticationState>(
       listener: (context, state) {
         if (state is AuthenticationLoading) {
-          Alert(
-            context: context,
-            title: 'Creating User Account',
-            content: Container(
-              child: CircularProgressIndicator(),
-            ),
-          ).show();
+          showDefaultLoadingDialog(
+              context: context, title: 'Creating user account');
         } else if (state is AuthenticationError) {
           if (Navigator.canPop(context)) Navigator.pop(context);
           Alert(
@@ -76,60 +73,62 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SvgPicture.asset('assets/svg/register.svg'),
+                  Text(
+                    'Register User',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: size.height * 0.05,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   Form(
                     key: _formKey,
                     child: Column(
                       children: [
                         DefaulTextInputField(
+                          textInputType: TextInputType.text,
                           hintText: 'Name',
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter some text';
-                            }
-                            return null;
-                          },
+                          validator: Validators.validateUserName,
                           onSaved: (String value) => userName = value,
                         ),
                         SizedBox(
                           height: size.height * 0.02,
                         ),
                         DefaulTextInputField(
+                          textInputType: TextInputType.emailAddress,
                           hintText: 'Email',
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter some text';
-                            }
-                            return null;
-                          },
+                          validator: Validators.validateEmail,
                           onSaved: (String value) => email = value,
                         ),
                         SizedBox(
                           height: size.height * 0.02,
                         ),
                         DefaulTextInputField(
+                          textInputType: TextInputType.visiblePassword,
                           hintText: 'Password',
                           isPassword: true,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter some text';
-                            }
-                            return null;
-                          },
+                          validator: Validators.validatePassword,
                           onSaved: (String value) => password = value,
                         ),
                         SizedBox(
                           height: size.height * 0.02,
                         ),
                         DefaulTextInputField(
+                          textInputType: TextInputType.phone,
                           hintText: 'Phone Number',
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter some text';
-                            }
-                            return null;
-                          },
+                          validator: Validators.validatePhoneNumber,
                           onSaved: (String value) => phoneNumber = value,
+                        ),
+                        SizedBox(
+                          height: size.height * 0.02,
+                        ),
+                        Text(
+                          'Account type',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: NeumorphicTheme.defaultTextColor(context),
+                          ),
                         ),
                         SizedBox(
                           height: size.height * 0.02,
@@ -141,60 +140,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 : accountType = AccountType.merchant;
                           },
                         ),
-                        // RadioListTile(
-                        //   activeColor: Theme.of(context).primaryColor,
-                        //   title: Text('Customer'),
-                        //   shape: OutlineInputBorder(
-                        //     borderSide: BorderSide.none,
-                        //     borderRadius: BorderRadius.circular(10.0),
-                        //   ),
-                        //   groupValue: accountType,
-                        //   value: AccountType.customer,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       accountType = value;
-                        //     });
-                        //   },
-                        // ),
-                        // RadioListTile(
-                        //   activeColor: Theme.of(context).primaryColor,
-                        //   shape: CircleBorder(),
-                        //   title: Text('Merchant'),
-                        //   groupValue: accountType,
-                        //   value: AccountType.merchant,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       accountType = value;
-                        //     });
-                        //   },
-                        // ),
-                        // RadioListTile(
-                        //   selectedTileColor: Theme.of(context).primaryColor,
-                        //   title: Text('Vaccinated'),
-                        //   shape: OutlineInputBorder(
-                        //     borderSide: BorderSide.none,
-                        //     borderRadius: BorderRadius.circular(10.0),
-                        //   ),
-                        //   groupValue: vaccinated,
-                        //   value: true,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       vaccinated = value;
-                        //     });
-                        //   },
-                        // ),
-                        // RadioListTile(
-                        //   selectedTileColor: Theme.of(context).primaryColor,
-                        //   shape: CircleBorder(),
-                        //   title: Text('Not Vaccinated'),
-                        //   groupValue: vaccinated,
-                        //   value: false,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       vaccinated = value;
-                        //     });
-                        //   },
-                        // ),
                       ],
                     ),
                   ),
