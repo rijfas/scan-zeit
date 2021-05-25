@@ -1,6 +1,7 @@
 ![BFH Banner](https://trello-attachments.s3.amazonaws.com/542e9c6316504d5797afbfb9/542e9c6316504d5797afbfc1/39dee8d993841943b5723510ce663233/Frame_19.png)
 # Scan Zeit
 Scan Zeit is a mobile application where shopkeepers have an app that shows QR code and users can scan this QR code which will automatically add that user to the visitor list. This should replace manual entry of contact details in the shop due to COVID.
+![Scan Zeit Banner](banner.png)
 
 ## Team members
 1. [Rijfas](https://github.com/rijfas/)
